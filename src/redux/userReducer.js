@@ -1,6 +1,6 @@
 import {
     GET_DATA, GET_ONE_USER,
-    GET_PERSONAL_DATA,
+    GET_PERSONAL_DATA, LOG_OUT,
     SET_DATA, SET_PERSONAL_DATA, SET_TOKEN,
 } from "./actions/action-types";
 
@@ -21,6 +21,15 @@ const userReducer = (state = INITIAL_STATE,action) => {
         case GET_ONE_USER:
             let one = state.find(item=>item.id===action.payload);
                 return one;
+        case LOG_OUT:
+            return {...state,
+                currentUser: null,
+                token: null,
+                loadedKeyId: null,
+                keyUser: null,
+                userCompanies: [],
+                products: []
+            }
         default:
             return state
     }

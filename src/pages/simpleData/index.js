@@ -9,6 +9,7 @@ import {Button, Col, Form, Modal, Row, Table} from 'react-bootstrap'
 import {useFilters, useGlobalFilter, usePagination, useSortBy, useTable} from "react-table";
 import st from './table.module.scss';
 import './product.css';
+import Header from "./header";
 
 const Product = ({personal,SETDATA,DATA})=>{
     const history = useHistory();
@@ -103,13 +104,7 @@ const Product = ({personal,SETDATA,DATA})=>{
     }
     return(
         <>
-            {console.log('pers',personal)}
-            <Row className={'flex'} style={{display:'flex'}}>
-                <Col md={8}></Col>
-                <Col md={4}>
-                        <h3>{personal?.first_name+' '+personal.last_name}</h3>
-                </Col>
-            </Row>
+            <Header personal={personal}/>
             <div className={'slide-fwd-bottom'}>
                 <Modal size={'lg'} style={{marginLeft:"-200px"}} show={show} onHide={()=>toggle()}>
                     <Modal.Header closeButton>Description</Modal.Header>
@@ -124,9 +119,10 @@ const Product = ({personal,SETDATA,DATA})=>{
                             <p>deliverer_accepted_time :<span> {one?.deliverer_accepted_time}</span></p>
                             <p>payment type :<span> {one?.payment_type?.name}</span></p>
                         </div>
-                        <Table>
+                        <Table striped bordered hover responsive>
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>name</th>
                                     <th>manufacturer</th>
                                     <th>pharmacy</th>
@@ -137,8 +133,9 @@ const Product = ({personal,SETDATA,DATA})=>{
                             </thead>
                             <tbody>
                             {
-                                one?.items?.map(item=>(
-                                    <tr key={item.id}>
+                                one?.items?.map((item,index)=>(
+                                    <tr key={index}>
+                                        <td>{index+1}</td>
                                         <td>
                                             <img src={item?.drug?.image_thumbnail} alt=""/>
                                             {item.drug.name}
