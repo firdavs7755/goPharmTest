@@ -101,17 +101,13 @@ const Product = ({personal,SETDATA,DATA})=>{
         setShow(!show)
         setOne(DATA.find(item=>item.id===id))
     }
-    const logout=()=>{
-        localStorage.removeItem('token');
-        history.push('/login');
-    }
     return(
         <>
             {console.log('pers',personal)}
             <Row className={'flex'} style={{display:'flex'}}>
                 <Col md={8}></Col>
                 <Col md={4}>
-                        <h3>{personal?.first_name+' '+personal.last_name} <Button onClick={()=>logout()}>logout</Button></h3>
+                        <h3>{personal?.first_name+' '+personal.last_name}</h3>
                 </Col>
             </Row>
             <div className={'slide-fwd-bottom'}>

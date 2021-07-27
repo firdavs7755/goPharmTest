@@ -1,26 +1,19 @@
 import {combineReducers} from "redux";
 import userReducer from "./userReducer";
 import {createAction, createReducer} from "@reduxjs/toolkit";
+import {persistReducer} from "redux-persist";
+import storage from 'redux-persist/lib/storage';
 
-export const reducer = combineReducers({
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['users']
+}
+
+export const rootReducer = combineReducers({
     users:userReducer,
-    // isAdmin:true
 })
+export const pReducer = persistReducer(persistConfig, rootReducer);
 
+export default persistReducer(persistConfig, rootReducer);
 
-
-
-
-
-
-// const addAction = createAction("ADD_TODO");
-// const removeAction = createAction("REMOVE_TODO");
-// export const todosReducer = createReducer([],builder => {
-//     builder
-//         .addCase(removeAction,(state,action)=>{
-//             state.push(action.payload)
-//         })
-//         .addCase(removeAction,(state,action)=>{
-//             return state.filter((todo,i)=>i!==action.payload.index)
-//         })
-// })
