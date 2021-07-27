@@ -1,0 +1,15 @@
+.slide-fwd-bottom {
+    animation: slide-fwd-bottom 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+p{
+    margin-bottom: 0!important;
+}
+.modal-content{
+    width:130%!important;
+}
+img {
+    width: 30px;
+    height: 30px;
+    color: #7ab2ff;
+
+}
