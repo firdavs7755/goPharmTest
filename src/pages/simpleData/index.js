@@ -7,7 +7,7 @@ import {setData} from "../../redux/actions/userAction";
 import {useHistory} from 'react-router-dom'
 import {Button, Col, Form, Modal, Row, Table} from 'react-bootstrap'
 import {useFilters, useGlobalFilter, usePagination, useSortBy, useTable} from "react-table";
-import st from './table.module.scss';
+// import st from './table.module.scss';
 import './product.css';
 import Header from "./header";
 
@@ -17,6 +17,12 @@ const Product = ({personal,SETDATA,DATA})=>{
     const [one,setOne] = useState(undefined);
     const columns = React.useMemo(
         () => [
+            {
+                Header: 'N#',
+                Cell: (row) => {
+                    return <div>{Number(row.row.id) + 1}</div>;
+                },
+            },
             {
                 Header:"id",
                 accessor:"id"
@@ -106,7 +112,7 @@ const Product = ({personal,SETDATA,DATA})=>{
         <>
             <Header personal={personal}/>
             <div className={'slide-fwd-bottom'}>
-                <Modal size={'lg'} style={{marginLeft:"-200px"}} show={show} onHide={()=>toggle()}>
+                <Modal size={'lg'} style={{marginLeft:"-120px"}} show={show} onHide={()=>toggle()}>
                     <Modal.Header closeButton>Description</Modal.Header>
                     <Modal.Body>
                         <div>
@@ -119,10 +125,9 @@ const Product = ({personal,SETDATA,DATA})=>{
                             <p>deliverer_accepted_time :<span> {one?.deliverer_accepted_time}</span></p>
                             <p>payment type :<span> {one?.payment_type?.name}</span></p>
                         </div>
-                        <Table striped bordered hover responsive>
+                        <Table>
                             <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>name</th>
                                     <th>manufacturer</th>
                                     <th>pharmacy</th>
@@ -156,8 +161,8 @@ const Product = ({personal,SETDATA,DATA})=>{
             </div>
 
             <div style={{padding:'10px'}}>
-                <Table id='table' style={{backgroundColor:'rgba(122,178,255,0.5)'}} responsive bordered className={st.table} {...getTableProps()}>
-                    <thead>
+                <Table id='table' hover responsive {...getTableProps()}>
+                    <thead style={{backgroundColor:"rgba(110,181,193,0.51)"}}>
                     {headerGroups.map(headerGroup =>{
                         return(
                             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -165,8 +170,8 @@ const Product = ({personal,SETDATA,DATA})=>{
                                 {headerGroup.headers.map(column => (
                                     <th {...column.getHeaderProps()}>
                                         <div className='d-flex align-items-center justify-content-center'>
-                                            <span className={`mr-2 ${st.column__header}`}>{column.render('Header')}</span>
-                                            <span className={`my-auto ${st.removeOnPrint}`} {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                            <span className={`mr-2`}>{column.render('Header')}</span>
+                                            <span className={`my-auto`} {...column.getHeaderProps(column.getSortByToggleProps())}>
                                                 {   (!column.notSort)?
                                                     column.isSorted ?
                                                         column.isSortedDesc?
@@ -210,18 +215,18 @@ const Product = ({personal,SETDATA,DATA})=>{
             </div>
 
             <div className="pagination">
-                <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                <Button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
                     {"First"}
-                </button>{" "}
-                <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                </Button>{" "}
+                <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
                     {"prev"}
-                </button>{" "}
-                <button onClick={() => nextPage()} disabled={!canNextPage}>
+                </Button>{" "}
+                <Button onClick={() => nextPage()} disabled={!canNextPage}>
                     {"next"}
-                </button>{" "}
-                <button onClick={() => gotoPage(pageCount - 1)} disabled={!previousPage}>
+                </Button>{" "}
+                <Button onClick={() => gotoPage(pageCount - 1)} disabled={!previousPage}>
                     {"Last"}
-                </button>{" "}
+                </Button>{" "}
                 <span>
           Page{" "}
                     <strong>

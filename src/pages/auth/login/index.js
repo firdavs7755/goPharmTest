@@ -7,6 +7,10 @@ import {createStructuredSelector} from "reselect";
 import {selectToken} from "../../../redux/actions/user_selector";
 import {setPersonalData, setUserToken} from "../../../redux/actions/userAction";
 // import {setCurrentUser, setUsersData} from "../../../redux/actions/userAction";
+const style={
+    textAlign:'center',
+    marginTop:'200px'
+}
 const Login = ({setTokenn,setpersonal}) =>{
     const history = useHistory();
     const [data,setData] = useState({login:"",password:""});
@@ -15,20 +19,23 @@ const Login = ({setTokenn,setpersonal}) =>{
         e.preventDefault();
         loginApi.signin(data)
             .then(res=>{
+                if (res.status!==200){
+                    console.log('xxxx.......')
+                }else {
                     setSuccess(true);
                     console.log("res",res)
-                    // console.log("msg",res.data.user)
                     setTokenn(res.data.token)
                     setpersonal(res.data.user);
                     localStorage.setItem('token',res.data.token);
+                }
                     // history.push('/product')
                 // <Redirect to={'/product'}/>
             })
     }
     return(
-        <>
+        <div style={style}>
             <h1>login page</h1>
-            <Form onSubmit={e=>login(e)}>
+            <Form style={{display:'inline-grid'}} onSubmit={e=>login(e)}>
                 <Form.Group>
                     <Form.Label>
                         <Form.Control
@@ -38,6 +45,7 @@ const Login = ({setTokenn,setpersonal}) =>{
                             onChange={e => setData({...data,login: e.target.value})}
                             // value={data.serial_number}
                             required
+                            style={{marginBottom:'2px'}}
                         />
                         <Form.Control
                             id="password"
@@ -50,10 +58,10 @@ const Login = ({setTokenn,setpersonal}) =>{
 
                     </Form.Label>
                 </Form.Group>
-                <Button type={'submit'}>submit</Button>
+                    <Button className={'btn btn-info'} type={'submit'}>submit</Button>
                 {succes?<Redirect to={"/product"}/>:""}
             </Form>
-        </>
+        </div>
     )
 }
 const mstp = createStructuredSelector({

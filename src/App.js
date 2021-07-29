@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+// import './index.css'
+import './App.scss'
 import {data} from './data/users.json'
 import {connect, useDispatch, useSelector} from "react-redux";
 import {createStructuredSelector} from "reselect";
@@ -14,35 +16,19 @@ import {axiosInstance} from "./services/api";
 const ForAuthenticatedUsers=()=>{
     return(
         <>
-            {/*<Switch>*/}
-                <Route exact={true} path={'/product'} render={()=><Product/>}/>
-                <Route render={() => <Redirect to="/product" />}></Route>
-                {/*<Route path={'/product'} render={()=><Product/>}/>*/}
-                {/*<Route path={'/data'} render={()=><News/>}/>*/}
-            {/*</Switch>*/}
+            <Route exact={true} path={'/product'} render={()=><Product/>}/>
+            <Route render={() => <Redirect to="/product" />}></Route>
         </>
     )
 }
 
 
 function App({user_list,setdata,token,personal,setOne}) {
-    // const[isToken,setIsToken] = useState('');
     axiosInstance.defaults.headers.common['Authorization'] = "Bearer " + token;
-    // const checkToken = () =>{
-    //     let TOKEN = localStorage.getItem('token');
-    //     if (TOKEN){
-    //         setIsToken(TOKEN)
-    //     }
-    // }
-    // useEffect(()=>{
-    //    checkToken();
-    // },[]);
     return (
         <Switch>
             {
-                // localStorage.getItem('token')?<ForAuthenticatedUsers/>:<Auth/>
                 token?<ForAuthenticatedUsers/>:<Auth/>
-                // (localStorage.getItem('token')||token)?<ForAuthenticatedUsers/>:<Auth/>
             }
         </Switch>
   );
@@ -52,7 +38,6 @@ const mstp = createStructuredSelector({
     token: selectToken,
 })
 const mdtp = dispatch =>({
-    // setTokenn:(token)=>dispatch(setUserToken(token)),
-    // setpersonal:data=>dispatch(setPersonalData(data))
+
 })
 export default connect(mstp,mdtp) (App);

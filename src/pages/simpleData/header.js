@@ -5,7 +5,7 @@ import {selectData, selectPersonalData} from "../../redux/actions/user_selector"
 import {logOut, setData} from "../../redux/actions/userAction";
 import {connect} from "react-redux";
 const hStyle={
-    background:'rgba(70,114,173,0.58)'
+    background:'rgba(95,152,161,0.6)'
 }
 function Header({personal,signOut}) {
     function logOut() {
