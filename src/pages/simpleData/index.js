@@ -7,7 +7,6 @@ import {setData} from "../../redux/actions/userAction";
 import {useHistory} from 'react-router-dom'
 import {Button, Col, Form, Modal, Row, Table} from 'react-bootstrap'
 import {useFilters, useGlobalFilter, usePagination, useSortBy, useTable} from "react-table";
-// import st from './table.module.scss';
 import './product.css';
 import Header from "./header";
 
@@ -256,6 +255,6 @@ const mstp = createStructuredSelector({
 })
 const mdtp = dispatch =>({
     SETDATA:(data)=>dispatch(setData(data)),
-    // setpersonal:data=>dispatch(setPersonalData(data))
+
 })
 export default connect(mstp,mdtp) (Product);

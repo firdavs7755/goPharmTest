@@ -19,15 +19,11 @@ const Login = ({setTokenn,setpersonal}) =>{
         e.preventDefault();
         loginApi.signin(data)
             .then(res=>{
-                if (res.status!==200){
-                    console.log('xxxx.......')
-                }else {
                     setSuccess(true);
                     console.log("res",res)
                     setTokenn(res.data.token)
                     setpersonal(res.data.user);
                     localStorage.setItem('token',res.data.token);
-                }
             })
     }
     return(
@@ -41,7 +37,6 @@ const Login = ({setTokenn,setpersonal}) =>{
                             type = 'text'
                             placeholder = "login"
                             onChange={e => setData({...data,login: e.target.value})}
-                            // value={data.serial_number}
                             required
                             style={{marginBottom:'2px'}}
                         />
@@ -50,7 +45,6 @@ const Login = ({setTokenn,setpersonal}) =>{
                             type = 'text'
                             placeholder = "password"
                             onChange={e => setData({...data,password: e.target.value})}
-                            // value={data.serial_number}
                             required
                         />
 
@@ -63,7 +57,7 @@ const Login = ({setTokenn,setpersonal}) =>{
     )
 }
 const mstp = createStructuredSelector({
-    // token: selectToken
+
 })
 const mdtp = dispatch =>({
     setTokenn:(token)=>dispatch(setUserToken(token)),
