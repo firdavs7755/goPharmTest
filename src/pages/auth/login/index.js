@@ -28,8 +28,6 @@ const Login = ({setTokenn,setpersonal}) =>{
                     setpersonal(res.data.user);
                     localStorage.setItem('token',res.data.token);
                 }
-                    // history.push('/product')
-                // <Redirect to={'/product'}/>
             })
     }
     return(
